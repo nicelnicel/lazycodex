@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    --surface-base: #2a2dbf;
+    --brand-core: #5a5fef;
+    --brand-mid: #3236c4;
+    --brand-outer: #232897;
+    --text-primary: #ffffff;
+    --text-secondary: #dcdcf8;
+    --text-tertiary: #b9bce6;
+  }
+
+  html {
+    background-color: var(--surface-base);
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--surface-base);
+    background-image: radial-gradient(
+      ellipse 80% 60% at 50% 65%,
+      var(--brand-core) 0%,
+      var(--brand-mid) 60%,
+      var(--brand-outer) 100%
+    );
+    color: var(--text-primary);
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .brand-canvas {
+    background-color: var(--surface-base);
+    background-image: radial-gradient(
+      ellipse 80% 60% at 50% 65%,
+      var(--brand-core) 0%,
+      var(--brand-mid) 60%,
+      var(--brand-outer) 100%
+    );
+  }
+
+  ::selection {
+    background-color: var(--brand-outer);
+    color: var(--text-primary);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    border-radius: 6px;
+    outline: 2px solid var(--text-primary);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .splash-reveal {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+    animation: splash-reveal 720ms cubic-bezier(0.16, 1, 0.3, 1) 80ms forwards;
+  }
+
+  @keyframes splash-reveal {
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .splash-reveal {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
