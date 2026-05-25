@@ -1,0 +1,79 @@
+<div align="center">
+  <img src=".github/assets/lazycodex-logo.png" alt="LazyCodex" width="280">
+
+  <h1>LazyCodex</h1>
+
+  <p><strong>Codex for no-brainers.</strong><br />
+  You don't need to think. Just prompt with <code>ultrawork</code>.</p>
+
+  <p>
+    <a href="https://github.com/code-yeongyu/lazycodex/stargazers">
+      <img alt="Stars" src="https://img.shields.io/github/stars/code-yeongyu/lazycodex?style=for-the-badge&color=c69ff5&logoColor=D9E0EE&labelColor=302D41" />
+    </a>
+  </p>
+
+  <p>
+    <a href="#-what-is-this">What is this?</a>
+    ·
+    <a href="https://github.com/code-yeongyu/oh-my-openagent">OmO</a>
+    ·
+    <a href="https://lazycodex.dev">lazycodex.dev</a>
+  </p>
+
+  <br />
+
+  <p><strong>🚧 Coming Soon</strong></p>
+</div>
+
+<hr />
+
+## 💤 What is this?
+
+**LazyCodex** is the **lazy way** to get [OmO (oh-my-openagent)](https://github.com/code-yeongyu/oh-my-openagent) up and running.
+
+Think [LazyVim](https://github.com/LazyVim/LazyVim) for [lazy.nvim](https://github.com/folke/lazy.nvim), but for Codex.
+
+OmO is the best agent harness: discipline agents, parallel orchestration, multi-model routing, skills, hooks, and more. LazyCodex wraps it so you don't have to think about setup.
+
+> _"LazyVim made Neovim usable for the rest of us. LazyCodex does the same for Codex."_
+
+## 🧩 What you get
+
+| Feature | Description |
+| --- | --- |
+| 🤖 **Discipline Agents** | Sisyphus orchestrates Hephaestus, Oracle, Librarian. A full AI dev team |
+| 🔀 **Parallel Execution** | Multiple agents working simultaneously on subtasks |
+| 🎯 **Multi-Model Routing** | Automatic model selection per task category |
+| 🛠️ **Skills System** | Extensible skill library for specialized tasks |
+| 📋 **Hooks & Lifecycle** | Pre/post hooks for every agent action |
+| 🔧 **Zero Config** | Sensible defaults, override when you want |
+
+## 🏗️ Architecture
+
+LazyCodex is a thin distribution layer. The core engine is [oh-my-openagent (OmO)](https://github.com/code-yeongyu/oh-my-openagent), included as a submodule under `src/`.
+
+```
+lazycodex/
+├── src/          → oh-my-openagent (submodule)
+├── README.md
+└── ...
+```
+
+LazyCodex is part of the [omo.dev](https://omo.dev) project. **omo in Codex**, packaged for the lazy.
+
+## 👷 Maintainer
+
+LazyCodex is maintained by **Jobdori**, the AI assistant that builds and ships [OmO](https://github.com/code-yeongyu/oh-my-openagent) in real-time.
+
+<div align="center">
+
+[![Sisyphus Labs](.github/assets/sisyphuslabs.png)](https://sisyphuslabs.ai)
+
+> **Meet your own Jobdori, Dori.**
+> **Join the waitlist at [sisyphuslabs.ai](https://sisyphuslabs.ai).**
+
+</div>
+
+## 📄 License
+
+MIT
