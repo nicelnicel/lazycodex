@@ -52,6 +52,34 @@ This is shorthand for `npx --yes --package oh-my-openagent omo install --platfor
 npx lazycodex-ai install --no-tui --codex-autonomous
 ```
 
+### Install from the Codex marketplace (experimental)
+
+The npx installer above stays the primary path. As an additive, experimental
+alternative you can install from inside Codex itself: type `/plugins`, open the
+**Add Marketplace** tab ("Add a marketplace from a Git repo or local root."),
+and enter `https://github.com/code-yeongyu/lazycodex`, then install `omo` from
+the `sisyphuslabs` marketplace. Or from the CLI:
+
+```bash
+codex plugin marketplace add https://github.com/code-yeongyu/lazycodex
+codex plugin add omo@sisyphuslabs
+```
+
+On the next launch, approve the omo hooks in Codex's startup review — hooks
+never run before approval. The first approved session prints
+`LazyCodex bootstrap running in background — restart the session when it completes`
+while a background worker finishes the setup (config blocks, agent roles, bin
+links, a pinned `sg` binary for the `ast_grep` MCP); restart when it is done.
+The marketplace path never touches Codex permission settings — autonomous mode
+remains the explicit `npx lazycodex-ai install --no-tui --codex-autonomous`
+choice.
+
+Upgrade with `codex plugin marketplace upgrade sisyphuslabs`. The next startup
+review shows the hooks as **Modified** — expected after every upgrade —
+re-approve them and the following session re-runs bootstrap on the new version.
+If anything looks pending or degraded, `npx lazycodex-ai doctor` explains what
+and why. Full details: [lazycodex.ai/docs](https://lazycodex.ai/docs).
+
 ### Verify it worked
 
 ```bash
