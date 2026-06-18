@@ -142,7 +142,7 @@ test.describe("site SEO + metadata", () => {
     const svgIcon = await request.get("/icon.svg")
     expect(svgIcon.status()).toBe(200)
     expect(svgIcon.headers()["content-type"]).toMatch(/image\/svg\+xml/)
-    expect(await svgIcon.text()).toContain("LazyCodex boulder favicon")
+    expect(await svgIcon.text()).toContain("LazyCodex mark")
 
     const appleIconHref = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href")
     expect(appleIconHref).toContain("/apple-icon.png")

@@ -3,41 +3,96 @@ import { SITE_CONFIG } from "../../lib/site-config"
 
 export function Hero(): JSX.Element {
   return (
-    <section className="relative isolate flex w-full flex-col items-center justify-center overflow-hidden rounded-[16px] bg-[color:var(--card-base)] px-[20px] py-[60px] text-center shadow-[0_40px_120px_rgba(0,0,0,0.6)] md:px-[60px] md:py-[70px] lg:aspect-[1200/630]">
-      {/* Card background — pure CSS gradient layers (the Codex-tone luminous
-          card). Kept image-free so the hero text is the LCP element and paints
-          at FCP: the path to a perfect Lighthouse performance score. The
-          boulder identity lives in the favicon and the ultrawork orbit below. */}
-      <div className="card-gradient-base absolute inset-0 -z-10" />
+    <section className="relative isolate flex w-full flex-col justify-end overflow-hidden rounded-[20px] bg-[color:var(--card-base)] px-[28px] pb-[44px] pt-[88px] shadow-[0_40px_120px_rgba(0,0,0,0.6)] md:px-[64px] md:pb-[56px] md:pt-[120px]">
+      {/* Card background — pure CSS gradient layers. A left-weighted emerald
+          glow rather than a flat centered slab, so the composition reads as
+          a crafted product moment instead of a generic gradient card.
+          Image-free so the hero text is the LCP element and paints at FCP. */}
       <div className="card-gradient-pools absolute inset-0 -z-10" />
-      <div className="card-gradient-sheen absolute -inset-[10%] -z-10" />
       <div className="card-gradient-beam absolute inset-0 -z-10" />
+      <div className="card-gradient-sheen absolute -inset-[10%] -z-10" />
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(90% 70% at 18% 110%, rgba(74,222,128,0.42) 0%, rgba(34,197,94,0.18) 28%, rgba(10,12,11,0) 60%), linear-gradient(180deg, rgba(10,12,11,0.86) 0%, rgba(14,20,17,0.5) 45%, rgba(14,20,17,0) 100%)",
+        }}
+      />
 
-      {/* Card Content */}
-      <div className="flex flex-col items-center justify-center gap-[30px]">
-        <p className="font-mono text-[15px] font-medium uppercase tracking-[0.32em] text-[color:var(--text-soft)] opacity-90">
-          {SITE_CONFIG.eyebrow}
-        </p>
+      {/* Content — left-aligned editorial with a right-anchored mark panel
+          so the hero composes as a scene, not a blank gradient field. */}
+      <div className="flex items-end justify-between gap-8">
+        <div className="flex max-w-[820px] flex-col gap-[20px] text-left">
+          <p className="font-mono text-[13px] font-medium uppercase tracking-[0.28em] text-[color:var(--accent-mint)]">
+            {SITE_CONFIG.eyebrow}
+          </p>
 
-        <h1 className="wordmark m-0 text-balance text-[clamp(64px,12vw,168px)] font-medium leading-[0.98] tracking-[-0.03em] text-[color:var(--text-primary)]">
-          {SITE_CONFIG.wordmark}
-        </h1>
+          <h1 className="wordmark m-0 text-balance text-[clamp(44px,7vw,104px)] font-semibold leading-[0.95] tracking-[-0.03em] text-[color:var(--text-primary)]">
+            {SITE_CONFIG.wordmark}
+          </h1>
 
-        <div className="m-0 max-w-[960px] text-balance text-[clamp(20px,3vw,34px)] font-normal leading-[1.35] tracking-[-0.005em] text-[color:var(--text-muted)]">
-          <p>{SITE_CONFIG.heroLineA}</p>
-          <p>
+          <p className="m-0 max-w-[640px] text-balance text-[clamp(18px,2.2vw,26px)] font-normal leading-[1.4] tracking-[-0.005em] text-[color:var(--text-secondary)]">
+            {SITE_CONFIG.heroLineA}
+          </p>
+
+          <p className="m-0 max-w-[620px] text-balance text-[clamp(15px,1.6vw,19px)] font-normal leading-[1.5] text-[color:var(--text-muted)]">
             {SITE_CONFIG.heroLineB.prefix}
-            <span className="inline-flex items-center rounded-md bg-white/10 px-2 py-0.5 font-mono text-[0.9em] text-[color:var(--text-soft)]">
+            <span className="font-mono text-[color:var(--accent-mint)]">
               {SITE_CONFIG.heroLineB.slot}
             </span>
             {SITE_CONFIG.heroLineB.suffix}
-            <strong className="font-medium text-[color:var(--accent-cyan)] drop-shadow-[0_0_8px_rgba(135,240,242,0.4)]">
+            <span className="font-medium text-[color:var(--accent-primary)]">
               {SITE_CONFIG.heroLineB.keyword}
-            </strong>
+            </span>
             {SITE_CONFIG.heroLineB.period}
           </p>
         </div>
+
+        {/* Right-anchored brand mark — a composed visual anchor. */}
+        <div className="hidden shrink-0 items-center justify-end md:flex">
+          <HeroMark />
+        </div>
       </div>
     </section>
+  )
+}
+
+function HeroMark(): JSX.Element {
+  return (
+    <div className="relative flex h-[180px] w-[180px] items-center justify-center md:h-[220px] md:w-[220px]">
+      <div
+        className="absolute inset-0 rounded-[28px] opacity-60 blur-2xl"
+        style={{ background: "radial-gradient(circle at 50% 50%, rgba(74,222,128,0.45) 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
+      <svg
+        width="160"
+        height="160"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+        className="relative h-[140px] w-[140px] md:h-[160px] md:w-[160px]"
+      >
+        <rect
+          x="2.4"
+          y="2.4"
+          width="19.2"
+          height="19.2"
+          rx="4.8"
+          fill="var(--card-base)"
+          stroke="var(--accent-primary)"
+          strokeWidth="1"
+        />
+        <path
+          d="M7 8 V16 H14.5"
+          fill="none"
+          stroke="var(--accent-mint)"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="15.8" cy="8" r="1.4" fill="var(--accent-primary)" />
+      </svg>
+    </div>
   )
 }

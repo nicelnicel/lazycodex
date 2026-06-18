@@ -51,7 +51,7 @@ export function GithubStarsPill(): JSX.Element {
       href={SITE_CONFIG.githubStarsUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-8 items-center gap-1.5 rounded-full border border-[#172323] bg-[#0E1313] px-3 text-sm font-medium text-[color:var(--accent-cyan)] transition-colors hover:border-[color:var(--accent-teal)] hover:bg-[#131a1a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-cyan)]"
+      className="group flex h-8 items-center gap-1.5 rounded-full border border-[color:var(--accent-primary-border)] bg-[color:var(--accent-primary-soft)] px-3 text-sm font-medium text-[color:var(--accent-primary)] transition-colors hover:border-[color:var(--accent-primary)] hover:bg-[color:var(--accent-primary-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-primary)]"
       aria-label={`${starsLabel} stars on GitHub`}
     >
       <svg

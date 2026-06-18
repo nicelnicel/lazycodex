@@ -92,10 +92,10 @@ test.describe("landing page — links + footer", () => {
     await expect(docs).toHaveAttribute("href", SITE_CONFIG.docsPath)
   })
 
-  test("co-brands sisyphuslabs and shows lazycodex.ai", async ({ page }) => {
+  test("links to OmO and shows lazycodex.ai", async ({ page }) => {
     await page.goto("/")
     await expect(
-      page.locator(`a[href="${SITE_CONFIG.sisyphusUrl}"]`).first(),
+      page.locator(`a[href="${SITE_CONFIG.omoUrl}"]`).first(),
     ).toBeVisible()
     await expect(page.getByText("lazycodex.ai", { exact: false }).first()).toBeVisible()
   })

@@ -9,23 +9,23 @@ export function UltraworkSection(): JSX.Element {
         {SITE_CONFIG.ultraworkTagline}
       </h2>
 
-      <div className="mt-8 rounded-lg border border-[color:var(--accent-cyan)]/20 bg-[color:var(--accent-cyan)]/5 px-6 py-3 shadow-[0_0_30px_rgba(135,240,242,0.1)]">
-        <code className="font-mono text-lg font-medium text-[color:var(--accent-glow)]">
+      <div className="mt-8 rounded-lg border border-[color:var(--accent-primary)]/20 bg-[color:var(--accent-primary)]/5 px-6 py-3 shadow-[0_0_30px_rgba(74,222,128,0.1)]">
+        <code className="font-mono text-lg font-medium text-[color:var(--accent-mint)]">
           {SITE_CONFIG.ultraworkExample}
         </code>
       </div>
 
       <div className="relative mt-24 flex w-full max-w-[960px] flex-col items-center rounded-3xl bg-black px-4 py-16 shadow-2xl ring-1 ring-white/5">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(135,240,242,0.08)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(74,222,128,0.08)_0%,transparent_70%)] blur-3xl" />
         
-        <h3 
+        <h3
           className="mb-12 text-center text-[clamp(28px,4vw,48px)] font-semibold tracking-tight"
           style={{
-            background: "linear-gradient(180deg, #f0daaf 0%, #e4c380 50%, #5d5135 100%)",
+            background: "linear-gradient(180deg, #86efac 0%, #4ade80 50%, #16a34a 100%)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             color: "transparent",
-            opacity: 0.85
+            opacity: 0.9
           }}
         >
           Ultrawork

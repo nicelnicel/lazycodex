@@ -15,20 +15,20 @@ export function SiteFooter(): JSX.Element {
 
         <div className="flex items-center gap-6">
           <a
+            href={SITE_CONFIG.omoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-[color:var(--accent-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-primary)]"
+          >
+            OmO
+          </a>
+          <a
             href={SITE_CONFIG.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-[color:var(--accent-cyan)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-cyan)]"
+            className="transition-colors hover:text-[color:var(--accent-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-primary)]"
           >
             GitHub
-          </a>
-          <a
-            href={SITE_CONFIG.sisyphusUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-[color:var(--accent-cyan)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-cyan)]"
-          >
-            by Sisyphus Labs
           </a>
         </div>
       </div>

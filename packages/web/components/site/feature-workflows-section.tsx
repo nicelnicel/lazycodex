@@ -6,7 +6,7 @@ export function FeatureWorkflowsSection(): JSX.Element {
     <section className="mx-auto mt-24 w-full max-w-[1200px] px-4 md:mt-32 md:px-8">
       <div className="grid gap-8 border-y border-white/10 py-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:py-16">
         <div>
-          <p className="font-mono text-xs uppercase text-[color:var(--accent-cyan)]">
+          <p className="font-mono text-xs uppercase text-[color:var(--accent-primary)]">
             {SITE_CONFIG.featureWorkflows.kicker}
           </p>
           <h2 className="mt-4 text-balance text-[clamp(32px,5vw,56px)] font-medium leading-tight text-[color:var(--text-primary)]">
@@ -39,7 +39,7 @@ export function FeatureWorkflowsSection(): JSX.Element {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 rounded-lg border border-[color:var(--accent-cyan)]/20 bg-[color:var(--accent-cyan)]/5 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-6">
+      <div className="mt-6 grid gap-4 rounded-lg border border-[color:var(--accent-primary)]/20 bg-[color:var(--accent-primary)]/5 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-6">
         <div>
           <h2 className="text-2xl font-medium text-[color:var(--text-primary)]">
             {SITE_CONFIG.builtInSkills.title}

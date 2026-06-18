@@ -22,7 +22,7 @@ export function CopyButton({ value, className = "" }: CopyButtonProps): JSX.Elem
     <button
       type="button"
       onClick={handleCopy}
-      className={`group relative flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-[color:var(--surface-panel)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-cyan)] ${className}`}
+      className={`group relative flex h-8 w-8 items-center justify-center rounded-md transition-colors hover:bg-[color:var(--surface-panel)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-primary)] ${className}`}
       aria-label="Copy install command"
     >
       <span className="sr-only" aria-live="polite">
@@ -39,7 +39,7 @@ export function CopyButton({ value, className = "" }: CopyButtonProps): JSX.Elem
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-[color:var(--accent-cyan)]"
+          className="text-[color:var(--accent-primary)]"
           aria-hidden="true"
         >
           <polyline points="20 6 9 17 4 12" />

@@ -4,7 +4,7 @@ import { CopyButton } from "./copy-button"
 
 export function InstallBlock(): JSX.Element {
   return (
-    <section className="mx-auto mt-12 flex w-full max-w-2xl flex-col items-center gap-4 px-4 md:mt-16">
+    <section className="mx-auto mt-8 flex w-full max-w-2xl flex-col items-center gap-4 px-4 md:mt-10">
       <div className="flex w-full items-center justify-between rounded-lg border border-white/10 bg-[color:var(--surface-panel)] p-2 pl-4 shadow-lg">
         <div className="flex items-center gap-3 overflow-x-auto">
           <span className="select-none font-mono text-[color:var(--text-tertiary)]" aria-hidden="true">

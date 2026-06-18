@@ -12,7 +12,7 @@ const DESCRIPTION =
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#008385",
+  themeColor: "#22c55e",
   colorScheme: "dark",
 }
 
@@ -36,12 +36,11 @@ export const metadata: Metadata = {
     "complex codebases",
     "verified completion",
     "project memory",
-    "sisyphus",
     "lazyvim",
   ],
   authors: [{ name: "Yeongyu Kim", url: "https://github.com/code-yeongyu" }],
   creator: "Yeongyu Kim",
-  publisher: "Sisyphus Labs",
+  publisher: "Yeongyu Kim",
   alternates: {
     canonical: "/",
   },
@@ -89,8 +88,8 @@ const jsonLd = {
   },
   publisher: {
     "@type": "Organization",
-    name: "Sisyphus Labs",
-    url: "https://sisyphuslabs.ai",
+    name: "LazyCodex",
+    url: SITE_URL,
   },
   offers: {
     "@type": "Offer",

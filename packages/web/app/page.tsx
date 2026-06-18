@@ -2,6 +2,7 @@ import type { JSX } from "react"
 import { CommandCards } from "../components/site/command-cards"
 import { DocsCta } from "../components/site/docs-cta"
 import { FeatureWorkflowsSection } from "../components/site/feature-workflows-section"
+import { HephaestusSection } from "../components/site/hephaestus-section"
 import { Hero } from "../components/site/hero"
 import { InstallBlock } from "../components/site/install-block"
 import { SiteFooter } from "../components/site/site-footer"
@@ -20,12 +21,13 @@ export default function LandingPage(): JSX.Element {
 
       <SiteHeader />
 
-      <main id="content" className="flex-1 pb-16 pt-8 md:pt-12">
+      <main id="content" className="flex-1 pb-16 pt-6 md:pt-8">
         <div className="mx-auto max-w-[1200px] px-4 md:px-8">
           <Hero />
         </div>
         <InstallBlock />
         <CommandCards />
+        <HephaestusSection />
         <FeatureWorkflowsSection />
         <UltraworkSection />
         <DocsCta />
