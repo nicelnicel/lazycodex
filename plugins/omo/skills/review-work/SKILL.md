@@ -69,6 +69,14 @@ include raw tokens, credentials, auth headers, cookies, API keys, env dumps,
 private logs, or PII; summarize with lengths, hashes, and short non-sensitive
 prefixes when identity is needed.
 
+## Current Review Boundary
+
+Review the current delivery, not the project's entire historical process. The binding scope is the original goal, current constraints, current changed files, current diff or staged diff, run command, and verification evidence supplied for this review. Historical plans, old evidence files, obsolete drafts, previous review artifacts, abandoned paths, and untracked workflow logs are background only unless they are inside the current diff/staged diff or the caller explicitly includes them in scope.
+
+Do not fail a lane only because an out-of-scope workflow artifact is stale, worded differently, noisy, or missing. Such findings are non-blocking notes unless they directly contradict the current goal, current code behavior, current verification evidence, current commit boundary, or safety/secrecy requirements. If scope is ambiguous, report `INCONCLUSIVE` with the exact missing boundary instead of expanding the review to all workflow history.
+
+Context mining must distinguish "missed product requirement" from "old process residue." Old process residue is not a missed requirement unless current scoped evidence depends on it.
+
 The 5 agents cover complementary concerns - together they form a comprehensive review that no single reviewer could match:
 
 | # | Agent | Type | Role | Focus Level |
@@ -94,6 +102,7 @@ Before launching agents, collect these inputs. Extract from conversation history
 - **DIFF**: Auto-collect via `git diff HEAD~1` or against the appropriate base.
 - **FILE_CONTENTS**: Read the full content of each changed file (not just the diff). Oracle agents cannot read files - they need full context in the prompt.
 - **RUN_COMMAND**: How to start/run the application. Check `package.json` scripts, `Makefile`, `docker-compose.yml`, or ask the user.
+- **REVIEW_BOUNDARY**: The exact current scope: current diff or staged diff, changed files, active plan or requested task, and which workflow artifacts are in scope. If not provided, default to current changed files and current verification evidence only.
 
 </required_inputs>
 
@@ -116,6 +125,8 @@ git diff HEAD~1  # or: git diff main...HEAD
 ```
 
 For GOAL, CONSTRAINTS, BACKGROUND - review the full conversation history. The user's original message almost always contains the goal. Constraints often emerge during discussion. If anything critical is ambiguous, ask ONE focused question - not a checklist.
+
+Before launching agents, paste the Current Review Boundary into every lane prompt. A lane may not broaden review to historical workflow files, old artifacts, or unrelated dirty work unless those files are named in `CHANGED_FILES`, appear in the current diff/staged diff, or are required to reproduce the current verification evidence.
 
 ---
 

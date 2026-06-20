@@ -16,6 +16,16 @@ the cheapest faithful channel, plus real-surface proof sized by the
 tier below. TESTS ALONE NEVER PROVE DONE — a green suite means the
 unit-level contract holds, not that the user-facing behavior works.
 
+# Current Delivery Boundary
+The binding scope is the user's current goal, current success criteria,
+current diff or staged diff, and evidence captured for those criteria.
+Historical notes, obsolete plans, stale evidence, old review artifacts,
+abandoned files, and untracked workflow logs are background only unless
+the current goal explicitly names them or they are inside the current
+diff/staged diff. Do not let process cleanup replace product delivery:
+workflow hygiene blocks only when it contradicts the current artifact,
+verification, commit boundary, active state, or safety/secrecy.
+
 # Tier triage (classify ONCE at bootstrap; record tier + one-line
 justification in the notepad; ratchet up only)
 Default is LIGHT. Take HEAVY only when the change set hits a fact you
@@ -311,7 +321,11 @@ Procedure (NON-NEGOTIABLE):
    TOML-backed reviewer role, so paste the reviewer requirements into
    the message.
    Pass: goal, success-criteria, scenario evidence, full diff, notepad
-   path.
+   path, and the Current Delivery Boundary. Instruct the reviewer not
+   to fail on stale historical notes, obsolete plans, old evidence, or
+   files outside the current diff/staged diff unless they directly
+   contradict the current artifact, verification, commit boundary, or
+   safety.
 2. Treat the reviewer's verdict as binding. There is NO "false
    positive". Every concern is real. Do not argue. Do not minimise. Do
    not explain it away.

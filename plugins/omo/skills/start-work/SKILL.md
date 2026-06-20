@@ -43,6 +43,14 @@ Every `multi_agent_v1.spawn_agent` message is a self-contained executable assign
 
 Plan and reviewer agents may run for a long time: spawn them in the background, keep the parent in the orchestration loop, and poll with short `multi_agent_v1.wait_agent` cycles — never a single long blocking wait. A timeout only means no new mailbox update arrived; treat a running child as alive. Require `WORKING: <task> - <current phase>` before long passes and `BLOCKED: <reason>` only when progress stops. Keep the parent visibly alive with active subagent count, names, and latest `WORKING:` phase. A silent but running child is not failed and must not be closed. Fallback only when the child is completed without the deliverable, ack-only after followup and no longer running, explicitly `BLOCKED:`, or no longer running — then record inconclusive (never a pass) and respawn a smaller `fork_context: false` task with the missing deliverable. Close only children that are already completed, blocked, no longer running, or explicitly superseded by a newer user request touching the same files.
 
+# Current-Scope Delivery Boundary
+
+The current delivery scope is the active user goal, the selected plan's unchecked top-level checkbox, the current diff or staged diff, and the current ledger entries written for that scope. Historical plans, obsolete evidence, old drafts, previous review artifacts, abandoned files, and untracked workflow logs are background only unless the active plan explicitly names them or they are inside the current diff/staged diff.
+
+Do not let workflow hygiene replace product delivery. A workflow file issue blocks completion only when it directly prevents reproducing verification, corrupts the active plan or Boulder state, changes the current commit boundary, exposes sensitive data, or was explicitly requested by the user. Otherwise record it as non-blocking context and finish the current product task.
+
+If a reviewer reports stale workflow material, first reduce the review scope to the current diff/staged diff and active plan. Mark obsolete background artifacts as ignored or superseded only when that is necessary for the current delivery; do not launch repeated review waves just to make historical evidence read consistently.
+
 # start-work
 
 Execute a Prometheus work plan until every top-level checkbox is complete. This skill pairs with the Codex `Stop` / `SubagentStop` continuation hook (`components/start-work-continuation`), which re-injects the next turn while `.omo/boulder.json` says this `codex:<session_id>` still has unchecked plan work.
@@ -134,6 +142,8 @@ For each checkbox, complete all five gates before marking it done:
 4. Adversarial QA: exercise every class the Phase 3 trigger map marks applicable and capture the observable result for each.
 5. Cleanup: register every QA resource teardown as its own todo when spawned (QA scripts, tmux assets, browser sessions, PIDs, ports, containers, temp dirs), execute each, and capture the receipt. No QA asset is left running.
 
+Gate scope is current-scope only: verify the active checkbox, current changed files, and current evidence. Do not scan unrelated historical workflow artifacts for new blockers. If a check discovers an out-of-scope workflow artifact problem, record it as non-blocking unless it meets the blocking conditions in **Current-Scope Delivery Boundary**.
+
 Append evidence to `.omo/start-work/ledger.jsonl`, one JSON object per line. Include at least `event`, `plan`, `task`, `session_id`, `commands`, `artifact`, `adversarial_classes`, and `cleanup` fields. `adversarial_classes` lists each probed class with its observable result and each ruled-out class with a one-line reason.
 
 ### Sisyphus-style completion contract
@@ -181,9 +191,10 @@ When all top-level checkboxes in `## TODOs` and `## Final Verification Wave` are
 
 1. Run the plan's final verification commands.
 2. Complete the **Global Review and Debugging Gate** before any completion claim, PR handoff, or branch handoff:
-   - Invoke the `review-work` skill with the final diff, changed files, user goal, constraints, run command, and verification evidence. All five review lanes must return PASS. A timeout, missing deliverable, ack-only child, `BLOCKED:`, or inconclusive lane is a gate failure, not approval.
+   - Invoke the `review-work` skill with the final diff, changed files, user goal, constraints, run command, and verification evidence. Tell every lane to review only the current diff/staged diff, the active plan, and the current verification evidence. All five review lanes must return PASS. A timeout, missing deliverable, ack-only child, `BLOCKED:`, or inconclusive lane is a gate failure, not approval.
    - Run a debugging-oriented runtime audit even when the review passes: name at least three plausible failure hypotheses for the changed surface, run the distinguishing checks against the actual artifact, and append the ruled-out or confirmed result to `.omo/start-work/ledger.jsonl`.
    - If any review lane or debugging hypothesis fails, invoke the `debugging` skill, confirm root cause with runtime evidence, add the minimal failing test or reproduction, fix it, rerun the affected verification, then rerun the Global Review and Debugging Gate.
+   - A review finding about stale historical evidence, obsolete drafts, old workflow logs, or files outside the current diff/staged diff is not a gate failure by itself. It becomes blocking only when it directly contradicts the current user goal, current changed files, current verification evidence, or current commit boundary.
    - Evidence hygiene is mandatory: redact or mask secrets and sensitive user data before writing `.omo/start-work/ledger.jsonl`, a PR body, or a handoff. Never include raw tokens, credentials, auth headers, cookies, API keys, env dumps, private logs, or PII; use concise summaries, lengths, hashes, or short non-sensitive prefixes instead.
    - If the work includes creating, updating, or handing off a PR, refresh `git status` and the PR/branch state after the gate, and include only redacted review/debugging evidence in the PR body or handoff.
 3. If worktree mode was used, sync `.omo/` state back to the main repo, merge or hand off exactly as requested, and remove the worktree only after successful merge or explicit handoff.
