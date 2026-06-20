@@ -265,12 +265,21 @@ work likely to exceed one wait cycle, tell the child to send
 review passes, and `BLOCKED: <reason>` only when it cannot progress.
 Track spawned agent names locally. Use `multi_agent_v1.wait_agent` for mailbox
 signals, but a timeout only means no new mailbox update arrived.
-Treat a running child as alive and keep doing independent root work.
+Treat a running child as alive and keep the parent in the orchestration
+loop only: poll, request status, route followups, integrate returned
+evidence, and update orchestration state. Do not use child wait time for
+independent product investigation, implementation, QA execution, review
+work, broad repository exploration, or side analysis; delegate that work
+to a scoped child instead.
 Fallback only when the child is completed without the
-deliverable, ack-only, or no longer running. If that followup is still
-silent or ack-only, record the result as inconclusive, do not count it
-as approval/pass, close it if safe, and respawn a smaller
-`fork_context: false` task with the missing deliverable.
+deliverable, ack-only and no longer running, or no longer running. A
+silent child whose state is still running is not failed and must not be
+closed. If a running child remains silent, send a status request and
+keep waiting; if progress must continue, spawn a smaller non-overlapping
+task or a read-only reviewer. If a non-running child still has no
+deliverable after followup, record the result as inconclusive, do not
+count it as approval/pass, and respawn a smaller `fork_context: false`
+task with the missing deliverable.
 
 # Subagent-dependent transition barrier
 Do not mark an `update_plan` step `completed` while an active child owns
@@ -281,9 +290,11 @@ that feed the plan have returned or been closed as inconclusive.
 Do not write the final answer, PR handoff, or completion summary while
 active child agents remain open. Use short `multi_agent_v1.wait_agent` cycles.
 After two silent waits send `TASK STILL ACTIVE: return <deliverable> or
-BLOCKED: <reason>`. After four silent or ack-only checks, close the lane as
-inconclusive, record that it is not approval, and respawn smaller only
-if the deliverable is still required.
+BLOCKED: <reason>`. After four silent checks, keep a running lane open and
+record it as waiting, not failed. Close a lane as inconclusive only when it
+is completed without a deliverable, explicitly `BLOCKED:`, or no longer
+running; record that it is not approval, and respawn smaller only if the
+deliverable is still required.
 
 # Verification gate (TRIGGERED, NOT OPTIONAL)
 
